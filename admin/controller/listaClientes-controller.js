@@ -14,11 +14,25 @@ const criaNovaLinha = (nome, email, id) => {
       </td>
   `;
   linhaNovoCliente.innerHTML = conteudo;
+  linhaNovoCliente.dataset.id = id;
   return linhaNovoCliente;
 };
 
 // percorre o DOM para buscar o corpo da tabela
 const tabela = document.querySelector("[data-tabela]");
+
+tabela.addEventListener("click", (evento) => {
+  let ehBotaoDeletar = evento.target.className === `botao-simples--excluir`;
+
+  if (ehBotaoDeletar) {
+    // metodo closest, indica o mais proximo do [data-id]
+    const linhaCliente = evento.target.closest("[data-id]");
+    let id = linhaCliente.dataset.id;
+    clienteService.removeCliente(id).then(() => {
+      linhaCliente.remove();
+    });
+  }
+});
 
 // pega os dados da API, faz um loop e itera sobre os dados e exibe na tela
 clienteService.listaClientes().then((data) => {
