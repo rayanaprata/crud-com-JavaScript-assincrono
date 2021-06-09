@@ -2,7 +2,7 @@ import { clienteService } from "../service/cliente-service.js";
 
 const formulario = document.querySelector("[data-form]");
 
-// colocando um evento de escuta no formulário, para que quando for clicado no bootão cadastrar ocorrer algum evento
+// colocando um evento de escuta no formulário, para que quando for clicado no botão cadastrar ocorrer algum evento
 
 formulario.addEventListener("submit", (evento) => {
   evento.preventDefault();
