@@ -1,24 +1,14 @@
 {
   "profile": [
     {
-      "nome": "felipe",
+      "nome": "Felipe",
       "email": "felipe@alura.com",
       "id": 1
     },
     {
-      "nome": "Rayana",
-      "email": "rayanaprata@uol.com.br",
+      "nome": "João",
+      "email": "joao@gmail.com",
       "id": 2
-    },
-    {
-      "nome": "rayana",
-      "email": "rayana.p@aluno.ifsc.edu.br",
-      "id": 3
-    },
-    {
-      "nome": "rayana",
-      "email": "rayana.p@aluno.ifsc.edu.br",
-      "id": 4
     }
   ]
 }

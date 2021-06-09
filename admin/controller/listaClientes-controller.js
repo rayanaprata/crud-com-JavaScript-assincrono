@@ -21,24 +21,37 @@ const criaNovaLinha = (nome, email, id) => {
 // percorre o DOM para buscar o corpo da tabela
 const tabela = document.querySelector("[data-tabela]");
 
-tabela.addEventListener("click", (evento) => {
-  let ehBotaoDeletar = evento.target.className === `botao-simples--excluir`;
+tabela.addEventListener("click", async (evento) => {
+  let ehBotaoDeletar =
+    evento.target.className == `botao-simples botao-simples--excluir`;
 
   if (ehBotaoDeletar) {
-    // metodo closest, indica o mais proximo do [data-id]
-    const linhaCliente = evento.target.closest("[data-id]");
-    let id = linhaCliente.dataset.id;
-    clienteService.removeCliente(id).then(() => {
+    try {
+      // metodo closest, indica o mais proximo do [data-id]
+      const linhaCliente = evento.target.closest("[data-id]");
+      let id = linhaCliente.dataset.id;
+      await clienteService.removeCliente(id);
       linhaCliente.remove();
-    });
+    } catch (erro) {
+      console.log(erro);
+      window.location.href = "../telas/erro.html";
+    }
   }
 });
 
 // pega os dados da API, faz um loop e itera sobre os dados e exibe na tela
-clienteService.listaClientes().then((data) => {
-  data.forEach((elemento) => {
-    tabela.appendChild(
-      criaNovaLinha(elemento.nome, elemento.email, elemento.id),
-    );
-  });
-});
+const render = async () => {
+  try {
+    const listaClientes = await clienteService.listaClientes();
+    listaClientes.forEach((elemento) => {
+      tabela.appendChild(
+        criaNovaLinha(elemento.nome, elemento.email, elemento.id),
+      );
+    });
+  } catch (erro) {
+    console.log(erro);
+    window.location.href = "../telas/erro.html";
+  }
+};
+
+render();
